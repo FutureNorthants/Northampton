@@ -44,39 +44,62 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[button layer] setCornerRadius:8.0f];
-    [[button layer] setMasksToBounds:YES];
-    [[button layer] setBorderWidth:1.0f];
-    [[button layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];
-    numbers = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",nil]; 
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [postcodePicker setCenter:CGPointMake(160,220)];
+            [button setCenter:CGPointMake(160,418)];
+        }else{
+            [postcodePicker setCenter:CGPointMake(160,220)];
+            [button setCenter:CGPointMake(160,418)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [postcodePicker setCenter:CGPointMake(160,148)];
+            [button setCenter:CGPointMake(160,330)];
+        }
+    }
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[button layer] setCornerRadius:8.0f];
+        [[button layer] setMasksToBounds:YES];
+        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    }else{
+        [[button layer] setCornerRadius:8.0f];
+        [[button layer] setMasksToBounds:YES];
+        [[button layer] setBorderWidth:1.0f];
+        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                            green:30/255.0
+                                                             blue:72/255.0
+                                                            alpha:1.0] CGColor]];
+    }
+    
+    numbers = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",nil];
     alphabet = [[NSArray alloc] initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",nil]; 
-    postCode3=@"1";
-    postCode4=@"1";
-    postCode5=@"D";
-    postCode6=@"E";
 
     self.navigationItem.title=@"My Postcode";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     if([defaults objectForKey:@"Postcode"]){
-        postCode3=[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(2,1)];
-        postCode4=[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(3,1)];
-        postCode5=[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(4,1)];
-        postCode6=[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(5,1)];
+        [postcodePicker selectRow:[numbers indexOfObject:[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(2,1)]] inComponent:2 animated:YES];
+        [postcodePicker selectRow:[numbers indexOfObject:[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(3,1)]] inComponent:3 animated:YES];
+        [postcodePicker selectRow:[alphabet indexOfObject:[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(4,1)]] inComponent:4 animated:YES];
+        [postcodePicker selectRow:[alphabet indexOfObject:[[defaults objectForKey:@"Postcode"] substringWithRange:NSMakeRange(5,1)]] inComponent:5 animated:YES];
+    }else{
+        [postcodePicker selectRow:[numbers indexOfObject: @"1"] inComponent:2 animated:YES];
+        [postcodePicker selectRow:[numbers indexOfObject: @"1"] inComponent:3 animated:YES];
+        [postcodePicker selectRow:[alphabet indexOfObject: @"D"] inComponent:4 animated:YES];
+        [postcodePicker selectRow:[alphabet indexOfObject: @"E"] inComponent:5 animated:YES];
     }
-    
-    [postcodePicker selectRow:[numbers indexOfObject: postCode3] inComponent:2 animated:YES];
-    [postcodePicker selectRow:[numbers indexOfObject: postCode4] inComponent:3 animated:YES]; 
-    [postcodePicker selectRow:[alphabet indexOfObject: postCode5] inComponent:4 animated:YES];
-    [postcodePicker selectRow:[alphabet indexOfObject: postCode6] inComponent:5 animated:YES];
-    
-    [postCode3 retain];
-    [postCode4 retain];
-    [postCode5 retain];
-    [postCode6 retain];
+
 
 }
 
@@ -150,37 +173,16 @@
     }
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    switch (component)
-    {
-        case 2:
-            postCode3 = [numbers objectAtIndex:row];
-            break;
-        case 3:
-            postCode4 = [numbers objectAtIndex:row];
-            break;
-        case 4:            
-            postCode5 = [alphabet objectAtIndex:row];
-            break;
-        case 5:
-            postCode6 = [alphabet objectAtIndex:row];
-            break;            
-        default:
-            break;
-    }
-    
-}
-
 -(IBAction)submitPostCode:(id)sender{
     SystemSoundID klick;
     AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
     AudioServicesPlaySystemSound(klick);
     NSString *temp1 = @"NN";
-    NSString *temp2 = [temp1 stringByAppendingString:postCode3];
-    NSString *temp3 = [temp2 stringByAppendingString:postCode4];
-    NSString *temp4 = [temp3 stringByAppendingString:postCode5];
-    NSString *postCode = [temp4 stringByAppendingString:postCode6];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
+    NSString *temp2 = [temp1 stringByAppendingString:[numbers objectAtIndex:[postcodePicker selectedRowInComponent:2]]];
+    NSString *temp3 = [temp2 stringByAppendingString:[numbers objectAtIndex:[postcodePicker selectedRowInComponent:3]]];
+    NSString *temp4 = [temp3 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:4]]];
+    postCode = [temp4 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:5]]];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:postCode forKey:@"Postcode"];    
     [defaults synchronize]; 
     

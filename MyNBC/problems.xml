@@ -1,5 +1,5 @@
 <problems>
-    <version>1</version>
+    <version>2</version>
     <problem>
         <problem-description>Flytipped Black Bags</problem-description>
         <problem-number>1</problem-number>
@@ -73,11 +73,11 @@
         <problem-number>18</problem-number>
     </problem>
     <problem>
-        <problem-description>Offensive Graffiti</problem-description>
+        <problem-description>Graffiti - Offensive </problem-description>
         <problem-number>19</problem-number>
     </problem>
     <problem>
-        <problem-description>Inoffensive Graffiti</problem-description>
+        <problem-description>Graffiti - Inoffensive </problem-description>
         <problem-number>20</problem-number>
     </problem>
 </problems>

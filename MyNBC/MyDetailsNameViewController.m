@@ -50,6 +50,25 @@
 {
     [super viewDidLoad];
     self.navigationItem.title=@"My Name";
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [self.view setBackgroundColor:[UIColor whiteColor]];
+            [textView setCenter:CGPointMake(160,75)];
+        }else{
+            [textView setCenter:CGPointMake(160,80)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [self.view setBackgroundColor:[UIColor whiteColor]];
+            [textView setCenter:CGPointMake(160,65)];
+        }
+    }
+    
     textView.returnKeyType = UIReturnKeyDone;
 }
 

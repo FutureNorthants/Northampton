@@ -23,6 +23,12 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>80x80_icon</string>
+				<string>58x58_icon</string>
+				<string>29x29_icon</string>
+				<string>120x120_icon</string>
+				<string>114x114_icon</string>
+				<string>57x57_icon</string>
 				<string>57x57_icon.png</string>
 				<string>114x114_icon.png</string>
 				<string>Default@2x.png</string>
@@ -31,7 +37,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>uk.gov.northampton.northampton</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -50,11 +56,11 @@
 	<string>MainWindow</string>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
+	<key>UILaunchImageFile</key>
+	<string>Default</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

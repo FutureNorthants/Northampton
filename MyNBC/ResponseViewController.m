@@ -57,29 +57,75 @@
         self.navigationItem.title=@"Want updates?";
     }
     
-    [[buttonResponseEmail layer] setCornerRadius:8.0f];
-    [[buttonResponseEmail layer] setMasksToBounds:YES];
-    [[buttonResponseEmail layer] setBorderWidth:1.0f];
-    [[buttonResponseEmail layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];
-    
-    [[buttonResponsePhone layer] setCornerRadius:8.0f];
-    [[buttonResponsePhone layer] setMasksToBounds:YES];
-    [[buttonResponsePhone layer] setBorderWidth:1.0f];
-    [[buttonResponsePhone layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];
-    
-    [[buttonResponseNo layer] setCornerRadius:8.0f];
-    [[buttonResponseNo layer] setMasksToBounds:YES];
-    [[buttonResponseNo layer] setBorderWidth:1.0f];
-    [[buttonResponseNo layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [buttonResponseEmail setCenter:CGPointMake(160,125)];
+            [buttonResponsePhone setCenter:CGPointMake(160,225)];
+            [buttonResponseNo setCenter:CGPointMake(160,325)];
+        }else{
+            [buttonResponseEmail setCenter:CGPointMake(160,120)];
+            [buttonResponsePhone setCenter:CGPointMake(160,220)];
+            [buttonResponseNo setCenter:CGPointMake(160,320)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [buttonResponseEmail setCenter:CGPointMake(160,75)];
+            [buttonResponsePhone setCenter:CGPointMake(160,175)];
+            [buttonResponseNo setCenter:CGPointMake(160,275)];
+        }
+    }
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        [buttonResponseEmail setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [buttonResponseEmail setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[buttonResponseEmail layer] setCornerRadius:8.0f];
+        [[buttonResponseEmail layer] setMasksToBounds:YES];
+        buttonResponseEmail.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+        
+        [buttonResponsePhone setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [buttonResponsePhone setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[buttonResponsePhone layer] setCornerRadius:8.0f];
+        [[buttonResponsePhone layer] setMasksToBounds:YES];
+        buttonResponsePhone.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+        
+        [buttonResponseNo setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [buttonResponseNo setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[buttonResponseNo layer] setCornerRadius:8.0f];
+        [[buttonResponseNo layer] setMasksToBounds:YES];
+        buttonResponseNo.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+
+    }else{
+        [[buttonResponseEmail layer] setCornerRadius:8.0f];
+        [[buttonResponseEmail layer] setMasksToBounds:YES];
+        [[buttonResponseEmail layer] setBorderWidth:1.0f];
+        [[buttonResponseEmail layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                         green:30/255.0
+                                                                          blue:72/255.0
+                                                                         alpha:1.0] CGColor]];
+        
+        [[buttonResponsePhone layer] setCornerRadius:8.0f];
+        [[buttonResponsePhone layer] setMasksToBounds:YES];
+        [[buttonResponsePhone layer] setBorderWidth:1.0f];
+        [[buttonResponsePhone layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                         green:30/255.0
+                                                                          blue:72/255.0
+                                                                         alpha:1.0] CGColor]];
+        
+        [[buttonResponseNo layer] setCornerRadius:8.0f];
+        [[buttonResponseNo layer] setMasksToBounds:YES];
+        [[buttonResponseNo layer] setBorderWidth:1.0f];
+        [[buttonResponseNo layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                      green:30/255.0
+                                                                       blue:72/255.0
+                                                                      alpha:1.0] CGColor]];
+ 
+    }
 }
 
 - (void)viewDidUnload

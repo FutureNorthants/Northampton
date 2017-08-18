@@ -16,6 +16,9 @@
     IBOutlet UILabel *collectionText;
     IBOutlet UILabel *collectionDescription;
     IBOutlet UILabel *collectionTime;
+    IBOutlet UILabel *label1;
+    IBOutlet UILabel *label2;
+    IBOutlet UILabel *label3;
     NSString *strPostcode;
     NSString *strCollectionDate;
     NSString *strCollectionDay;
@@ -25,7 +28,7 @@
     
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil data:(NSMutableArray *)addresses arrayEntry:(int) arrayEntry postcodeParam:(NSString *)postcodeParam;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil data:(NSMutableArray *)addresses arrayEntry:(NSInteger) arrayEntry postcodeParam:(NSString *)postcodeParam;
 
 - (IBAction)submitSetReminder:(id)sender;
 

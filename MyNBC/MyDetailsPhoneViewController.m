@@ -49,13 +49,44 @@
 {
     [super viewDidLoad];
     self.navigationItem.title=@"My Phone Number";
-    [[button layer] setCornerRadius:8.0f];
-    [[button layer] setMasksToBounds:YES];
-    [[button layer] setBorderWidth:1.0f];
-    [[button layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];}
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [textView setCenter:CGPointMake(160,95)];
+            [button setCenter:CGPointMake(160,215)];
+        }else{
+            [textView setCenter:CGPointMake(160,90)];
+            [button setCenter:CGPointMake(160,205)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [textView setCenter:CGPointMake(160,60)];
+            [button setCenter:CGPointMake(160,145)];
+        }
+    }
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[button layer] setCornerRadius:8.0f];
+        [[button layer] setMasksToBounds:YES];
+        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    }else{
+        [[button layer] setCornerRadius:8.0f];
+        [[button layer] setMasksToBounds:YES];
+        [[button layer] setBorderWidth:1.0f];
+        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                            green:30/255.0
+                                                             blue:72/255.0
+                                                            alpha:1.0] CGColor]];
+    }
+
+}
 
 - (void)viewDidUnload
 {

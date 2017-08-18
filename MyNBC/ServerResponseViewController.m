@@ -39,14 +39,55 @@
 {
     [super viewDidLoad];
     
-    [[retryButton layer] setCornerRadius:8.0f];
-    [[retryButton layer] setMasksToBounds:YES];
-    [[retryButton layer] setBorderWidth:1.0f];
-    [[retryButton layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                      green:172/255.0
-                                                      blue:198/255.0
-                                                      alpha:1.0] CGColor]];
-    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [labelCallNumberText setCenter:CGPointMake(160,168)];
+            [labelCallNumber setCenter:CGPointMake(160,243)];
+            [labelSlaDateText setCenter:CGPointMake(160,291)];
+            [labelSlaDate setCenter:CGPointMake(160,361)];
+            [retryButton setCenter:CGPointMake(160,418)];
+        }else{
+            [labelCallNumberText setCenter:CGPointMake(160,168)];
+            [labelCallNumber setCenter:CGPointMake(160,243)];
+            [labelSlaDateText setCenter:CGPointMake(160,291)];
+            [labelSlaDate setCenter:CGPointMake(160,361)];
+            [retryButton setCenter:CGPointMake(160,418)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [labelCallNumberText setCenter:CGPointMake(160,80)];
+            [labelCallNumber setCenter:CGPointMake(160,155)];
+            [labelSlaDateText setCenter:CGPointMake(160,203)];
+            [labelSlaDate setCenter:CGPointMake(160,273)];
+            [retryButton setCenter:CGPointMake(160,330)];
+        }
+    }
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        [labelCallNumberText setTextColor:[UIColor blackColor]];
+        [labelCallNumber setTextColor:[UIColor colorWithRed:0.0 green:153.0/255.0 blue:0.0 alpha:1.0]];
+        [labelSlaDateText setTextColor:[UIColor blackColor]];
+        [labelSlaDate setTextColor:[UIColor colorWithRed:0.0 green:153.0/255.0 blue:0.0 alpha:1.0]];
+        [retryButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [retryButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[retryButton layer] setCornerRadius:8.0f];
+        [[retryButton layer] setMasksToBounds:YES];
+        retryButton.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    }else{
+        [[retryButton layer] setCornerRadius:8.0f];
+        [[retryButton layer] setMasksToBounds:YES];
+        [[retryButton layer] setBorderWidth:1.0f];
+        [[retryButton layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                 green:30/255.0
+                                                                  blue:72/255.0
+                                                                 alpha:1.0] CGColor]];
+    }
+
     self.navigationItem.hidesBackButton = YES;
     [self submit];
 }
@@ -54,12 +95,7 @@
 -(void)submit{
     [retryButton setHidden:TRUE];
     self.navigationItem.title=@"Please Wait";
-    
-    UIActivityIndicatorView  *indicator = [[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
-    indicator.frame=CGRectMake(132, 160, 50, 50);
-    indicator.tag  = 1;
-    [self.view addSubview:indicator];
-    [indicator startAnimating];
+    indicator = [self showActivityIndicatorOnView:self.parentViewController.view];
     if(fromContact){
         [self submitContact];   
     }else{
@@ -87,9 +123,9 @@
 
 -(void)submitReport2{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //NSString *url = @"http:localhost:8080/mycouncil/CreateCall"; 
-    //NSString *url = @"http:selfserve.northampton.gov.uk/mycouncil-test/CreateCall"; 
-    NSString *url = @"http:selfserve.northampton.gov.uk/mycouncil/CreateCall"; 
+    //NSString *url = @"http:localhost:8080/mycouncildev/CreateCall";
+    NSString *url = @"https:selfserve.northampton.gov.uk/mycouncil-test/CreateCall";
+    //NSString *url = @"https:selfserve.northampton.gov.uk/mycouncil/CreateCall";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]]; 
     [request setHTTPMethod:@"POST"]; 
     [request setTimeoutInterval:240];
@@ -134,7 +170,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
     //NSString *url = @"http:localhost:8080/mycouncil/CreateContact";
     //NSString *url = @"http:selfserve.northampton.gov.uk/mycouncil-test/CreateContact";
-    NSString *url = @"http:selfserve.northampton.gov.uk/mycouncil/CreateContact";
+    NSString *url = @"https:selfserve.northampton.gov.uk/mycouncil/CreateContact";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]]; 
     [request setHTTPMethod:@"POST"]; 
     [request setTimeoutInterval:240];
@@ -169,8 +205,7 @@
 }
 
 - (void)submitFailed{
-    UIActivityIndicatorView *currentIndicator = (UIActivityIndicatorView *)[self.view viewWithTag:1];
-    [currentIndicator removeFromSuperview];
+    [indicator stopAnimating];
     self.navigationItem.title=@"Sorry";
     if(fromContact){
        labelCallNumberText.text=@"Your contact could not be sent"; 
@@ -194,9 +229,8 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [self parseThis:[[[NSString alloc] initWithData:serverResponse encoding:NSUTF8StringEncoding]autorelease]];
-    UIActivityIndicatorView *currentIndicator = (UIActivityIndicatorView *)[self.view viewWithTag:1];
-    [currentIndicator removeFromSuperview];
-     [connection release];
+    [indicator stopAnimating];
+    [connection release];
 }
 
 
@@ -212,6 +246,7 @@
 
 - (void)parseThis:(NSString *)xml 
 {
+    NSLog(@"xml=%@",xml	);
     xmlParser = [[NSXMLParser alloc] initWithData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
     [xmlParser setDelegate:self];
     [xmlParser setShouldProcessNamespaces:NO];
@@ -271,6 +306,7 @@
     else if ([currentElement isEqualToString:@"slaDate"]) 
     {
         [slaDate appendString:string];
+        NSLog(@"parse=%@",slaDate);
     } 
 }
 
@@ -281,6 +317,23 @@
     
     if ([elementName isEqualToString:@"slaDate"]) 
     {
+        
+        CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        if (screenBounds.size.height == 568) // 4 inch
+        {
+            if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+                [labelCallNumberText setCenter:CGPointMake(160,128)];
+                [labelCallNumber setCenter:CGPointMake(160,183)];
+                [labelSlaDateText setCenter:CGPointMake(160,251)];
+                [labelSlaDate setCenter:CGPointMake(160,301)];
+            }else{
+                [labelCallNumberText setCenter:CGPointMake(160,108)];
+                [labelCallNumber setCenter:CGPointMake(160,163)];
+                [labelSlaDateText setCenter:CGPointMake(160,231)];
+                [labelSlaDate setCenter:CGPointMake(160,284)];
+            }
+        }
+        
         self.navigationItem.title=@"Thank You";
         labelCallNumberText.text=@"Your call number is";
         labelCallNumber.text=callNumber;
@@ -297,7 +350,8 @@
                 labelSlaDateText.text=@"And will be resolved by";
             }
         }
-        labelSlaDate.text=slaDate;  
+        NSLog(@"date=%@",slaDate);
+        labelSlaDate.text=slaDate;
     }    
 } 
 
@@ -315,5 +369,31 @@
     labelCallNumberText.text=@"";
     [self submit];
 }
+
+- (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView
+{
+    CGSize viewSize = aView.bounds.size;
+    
+    // create new dialog box view and components
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc]
+                                                      initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    // other size? change it
+    activityIndicatorView.bounds = CGRectMake(0, 0, 65, 65);
+    activityIndicatorView.hidesWhenStopped = YES;
+    activityIndicatorView.alpha = 0.7f;
+    activityIndicatorView.backgroundColor = [UIColor blackColor];
+    activityIndicatorView.layer.cornerRadius = 10.0f;
+    
+    // display it in the center of your view
+    activityIndicatorView.center = CGPointMake(viewSize.width / 2.0, viewSize.height / 2.0);
+    
+    [aView addSubview:activityIndicatorView];
+    
+    [activityIndicatorView startAnimating];
+    
+    return [activityIndicatorView autorelease];
+}
+
 
 @end

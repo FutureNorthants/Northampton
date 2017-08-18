@@ -38,34 +38,103 @@
     [super viewDidLoad];
     self.navigationItem.title=@"Include a picture?";
     
-    [[buttonTakePhoto layer] setCornerRadius:8.0f];
-    [[buttonTakePhoto layer] setMasksToBounds:YES];
-    [[buttonTakePhoto layer] setBorderWidth:1.0f];
-    [[buttonTakePhoto layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];
-    
-    [[buttonUsePhoto layer] setCornerRadius:8.0f];
-    [[buttonUsePhoto layer] setMasksToBounds:YES];
-    [[buttonUsePhoto layer] setBorderWidth:1.0f];
-    [[buttonUsePhoto layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];
-    
-    [[buttonNoPhoto layer] setCornerRadius:8.0f];
-    [[buttonNoPhoto layer] setMasksToBounds:YES];
-    [[buttonNoPhoto layer] setBorderWidth:1.0f];
-    [[buttonNoPhoto layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                        green:172/255.0
-                                                         blue:198/255.0
-                                                        alpha:1.0] CGColor]];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){//Three buttons
+        if (screenBounds.size.height == 568) // 4 inch
+        {
+            if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+                [buttonTakePhoto setCenter:CGPointMake(160,120)];
+                [buttonUsePhoto setCenter:CGPointMake(160,220)];
+                [buttonNoPhoto setCenter:CGPointMake(160,320)];
+            }else{
+                [buttonTakePhoto setCenter:CGPointMake(160,120)];
+                [buttonUsePhoto setCenter:CGPointMake(160,220)];
+                [buttonNoPhoto setCenter:CGPointMake(160,320)];
+            }
+        }
+        else // 3.5 inch
+        {
+            if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+                [buttonTakePhoto setCenter:CGPointMake(160,80)];
+                [buttonUsePhoto setCenter:CGPointMake(160,180)];
+                [buttonNoPhoto setCenter:CGPointMake(160,280)];
+            }
+        }
+    }else{//Two Buttons
+        [buttonTakePhoto setHidden:TRUE];
+        if (screenBounds.size.height == 568) // 4 inch
+        {
+            if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+                [buttonTakePhoto setCenter:CGPointMake(160,140)];
+                [buttonUsePhoto setCenter:CGPointMake(160,240)];
+                [buttonNoPhoto setCenter:CGPointMake(160,340)];
+            }
+        }
+        else // 3.5 inch
+        {
+            if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+                [buttonTakePhoto setCenter:CGPointMake(160,80)];
+                [buttonUsePhoto setCenter:CGPointMake(160,180)];
+                [buttonNoPhoto setCenter:CGPointMake(160,280)];
+            }else{
+                [buttonTakePhoto setCenter:CGPointMake(160,40)];
+                [buttonUsePhoto setCenter:CGPointMake(160,140)];
+                [buttonNoPhoto setCenter:CGPointMake(160,240)];
+            }
+        }
+        
+    }
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        buttonTakePhoto.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+        [buttonTakePhoto setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [buttonTakePhoto setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[buttonTakePhoto layer] setCornerRadius:8.0f];
+        [[buttonTakePhoto layer] setMasksToBounds:YES];
+
+        buttonUsePhoto.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+        [buttonUsePhoto setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [buttonUsePhoto setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[buttonUsePhoto layer] setCornerRadius:8.0f];
+        [[buttonUsePhoto layer] setMasksToBounds:YES];
+        
+        buttonNoPhoto.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+        [buttonNoPhoto setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [buttonNoPhoto setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[buttonNoPhoto layer] setCornerRadius:8.0f];
+        [[buttonNoPhoto layer] setMasksToBounds:YES];
+
+    }else{
+        [[buttonTakePhoto layer] setCornerRadius:8.0f];
+        [[buttonTakePhoto layer] setMasksToBounds:YES];
+        [[buttonTakePhoto layer] setBorderWidth:1.0f];
+        [[buttonTakePhoto layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                     green:30/255.0
+                                                                      blue:72/255.0
+                                                                     alpha:1.0] CGColor]];
+        
+        [[buttonUsePhoto layer] setCornerRadius:8.0f];
+        [[buttonUsePhoto layer] setMasksToBounds:YES];
+        [[buttonUsePhoto layer] setBorderWidth:1.0f];
+        [[buttonUsePhoto layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                    green:30/255.0
+                                                                     blue:72/255.0
+                                                                    alpha:1.0] CGColor]];
+        
+        [[buttonNoPhoto layer] setCornerRadius:8.0f];
+        [[buttonNoPhoto layer] setMasksToBounds:YES];
+        [[buttonNoPhoto layer] setBorderWidth:1.0f];
+        [[buttonNoPhoto layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                   green:30/255.0
+                                                                    blue:72/255.0
+                                                                   alpha:1.0] CGColor]];
+    }
+
 
     
-    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
-       [buttonTakePhoto setHidden:TRUE]; 
-    }
+
     
     self.imagePicker = [[[UIImagePickerController alloc] init]autorelease];
     self.imagePicker.allowsEditing = NO;
@@ -93,8 +162,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
     [defaults setBool:true forKey:@"UseImage"];    
     [defaults synchronize];
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;  
-    [self presentModalViewController:self.imagePicker animated:YES];
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePicker.navigationBar.tintColor = [UIColor colorWithRed:170/255.0 green:30/255.0 blue:72/255.0 alpha:1.0];
+    //[self presentModalViewController:self.imagePicker animated:YES];
+    [self presentViewController:self.imagePicker animated:YES completion:NULL];
 }
 
 - (IBAction)usePhoto {
@@ -105,8 +176,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
     [defaults setBool:true forKey:@"UseImage"];    
     [defaults synchronize]; 
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;  
-    [self presentModalViewController:self.imagePicker animated:YES];
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePicker.navigationBar.tintColor = [UIColor colorWithRed:170/255.0 green:30/255.0 blue:72/255.0 alpha:1.0];
+    //[self presentModalViewController:self.imagePicker animated:YES];
+    [self presentViewController:self.imagePicker animated:YES completion:NULL];
 }
 
 - (IBAction)noPhoto {
@@ -125,7 +198,9 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)img editingInfo:(NSDictionary *)editInfo {
-    [self.imagePicker dismissModalViewControllerAnimated:YES];
+    [self.imagePicker dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"Test");
+    }];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
     [defaults setObject:UIImageJPEGRepresentation([self scaleAndRotateImage:img],1) forKey:@"ImageData"];  
     [defaults synchronize];

@@ -17,11 +17,13 @@
     MKCoordinateRegion region;
     MKCoordinateSpan span;
     CLLocationManager *locationManager;
+    IBOutlet UISegmentedControl *mapSwitch;
     bool locationSet;
     bool showNormalMap;
     IBOutlet UIButton *button;
 }
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *mapSwitch;
 
 -(IBAction)setLocation;
 -(IBAction) segmentedControlIndexChanged;

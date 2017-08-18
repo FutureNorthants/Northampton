@@ -12,7 +12,9 @@
 
 @interface BinFinder3ViewController : UIViewController {
     
+    IBOutlet UILabel *label1;
     IBOutlet UILabel *lookupResponse;
+    IBOutlet UILabel *label2;
     NSString *postcode;
     IBOutlet UIButton *buttonCheck;
     IBOutlet UIButton *buttonCall;

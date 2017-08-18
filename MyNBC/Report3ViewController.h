@@ -12,14 +12,12 @@
 
 @interface Report3ViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate> {
     IBOutlet UIButton *usebutton;
-    IBOutlet UIButton *reselectbutton;
     IBOutlet UIImageView *image;
 }
 
 @property (nonatomic, retain) UIImagePickerController *imagePicker;
 
 - (IBAction)usePhoto;
-- (IBAction)selectPhoto;
 
 @end
 

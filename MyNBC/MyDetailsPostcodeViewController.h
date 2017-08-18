@@ -13,10 +13,7 @@
 @interface MyDetailsPostcodeViewController : UIViewController<UIPickerViewDelegate> {
     NSArray *numbers;
     NSArray *alphabet;  
-    NSString *postCode3;
-    NSString *postCode4;
-    NSString *postCode5;
-    NSString *postCode6;   
+    NSString *postCode;
     IBOutlet UIButton *button;
     IBOutlet UIPickerView *postcodePicker;
     bool fromReport;

@@ -31,6 +31,7 @@
         CLLocationCoordinate2D problemLocation;
         NSURLConnection *serverConnection;
         IBOutlet UIButton *retryButton;
+        UIActivityIndicatorView *indicator;
 }
 
 - (void)submitFailed;

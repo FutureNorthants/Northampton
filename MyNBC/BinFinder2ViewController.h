@@ -13,9 +13,10 @@
 @interface BinFinder2ViewController : UIViewController<UIPickerViewDelegate> {
     
     NSMutableArray *addresses;
-    int currentAddressArrayEntry;
+    NSInteger currentAddressArrayEntry;
     NSString *strPostcode;
     IBOutlet UIButton *button;
+    IBOutlet UIPickerView *addressPicker;
     
 }
 

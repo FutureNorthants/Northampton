@@ -15,7 +15,7 @@
     NSString *serviceArea;
     NSMutableArray *sectionsExtArray;
     NSMutableArray *sectionsIntArray;
-    NSInteger wheelSelection;
+    IBOutlet UIPickerView *optionPicker;
     IBOutlet UIButton *button;
 }
 

@@ -65,13 +65,42 @@
 {
     [super viewDidLoad];
     self.navigationItem.title=@"Select a Reminder";
-    [[buttonReminder layer] setCornerRadius:8.0f];
-    [[buttonReminder layer] setMasksToBounds:YES];
-    [[buttonReminder layer] setBorderWidth:1.0f];
-    [[buttonReminder layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                                green:172/255.0
-                                                                 blue:198/255.0
-                                                                alpha:1.0] CGColor]];
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [reminderPicker setCenter:CGPointMake(160,220)];
+            [buttonReminder setCenter:CGPointMake(160,418)];
+        }else{
+            [reminderPicker setCenter:CGPointMake(160,220)];
+            [buttonReminder setCenter:CGPointMake(160,418)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [reminderPicker setCenter:CGPointMake(160,147)];
+            [buttonReminder setCenter:CGPointMake(160,335)];
+        }
+    }
+    
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        [buttonReminder setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [buttonReminder setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[buttonReminder layer] setCornerRadius:8.0f];
+        [[buttonReminder layer] setMasksToBounds:YES];
+        buttonReminder.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    }else{
+        [[buttonReminder layer] setCornerRadius:8.0f];
+        [[buttonReminder layer] setMasksToBounds:YES];
+        [[buttonReminder layer] setBorderWidth:1.0f];
+        [[buttonReminder layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                                    green:30/255.0
+                                                                     blue:72/255.0
+                                                                    alpha:1.0] CGColor]];
+    }
 }
 
 - (void)viewDidUnload
@@ -95,7 +124,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    int tempTime = intTime - (row * 100);
+    NSInteger tempTime = intTime - (row * 100);
     NSString *tempDay=@"";
     NSString *strTempTime=@"";
 
@@ -105,7 +134,7 @@
         }else if(tempTime-1200<1000){
             strTempTime=@"0"; 
         }
-        NSString *strTempTime2 = [strTempTime stringByAppendingString:[NSString stringWithFormat:@"%d", (tempTime-1200)]];        
+        NSString *strTempTime2 = [strTempTime stringByAppendingString:[NSString stringWithFormat:@"%ld", (tempTime-1200)]];
         NSString *strTempTime3 = [[strTempTime2 substringWithRange:NSMakeRange(0, 2)] stringByAppendingString:@":"];
         NSString *strTempTime4 = [strTempTime3 stringByAppendingString:[strTempTime2 substringWithRange:NSMakeRange(2, 2)]];
         tempDay=[strTempTime4 stringByAppendingString:strDay];
@@ -115,7 +144,7 @@
         }else if(tempTime<1000){
             strTempTime=@"0"; 
         }
-        NSString *strTempTime2 = [strTempTime stringByAppendingString:[NSString stringWithFormat:@"%d", tempTime]];
+        NSString *strTempTime2 = [strTempTime stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)tempTime]];
         NSString *strTempTime3 = [[strTempTime2 substringWithRange:NSMakeRange(0, 2)] stringByAppendingString:@":"];
         NSString *strTempTime4 = [strTempTime3 stringByAppendingString:[strTempTime2 substringWithRange:NSMakeRange(2, 2)]];
         tempDay=[strTempTime4 stringByAppendingString:strPreviousDay];
@@ -139,7 +168,7 @@
                                    @"Put out bins"];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     localNotification.applicationIconBadgeNumber = -1;
-    localNotification.repeatInterval = NSWeekCalendarUnit;
+    localNotification.repeatInterval = NSCalendarUnitWeekOfYear;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
     UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:@""

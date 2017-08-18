@@ -13,10 +13,12 @@
     IBOutlet UIWebView  *website;
     NSString *websiteUrl;
     bool homePage;
+    bool addressSearch;
+    UIActivityIndicatorView *indicator;
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView *website;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil url:(NSString *)paramURL homePage:(bool)paramHomePage;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil url:(NSString *)paramURL homePage:(bool)paramHomePage addressSearch:(bool)paramAddressSearch;
 
 @end

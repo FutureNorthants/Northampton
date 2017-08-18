@@ -14,10 +14,11 @@
     
     NSString *strDay;
     NSString *strPreviousDay;
-    int intTime;
-    int fireDateModifier;
+    NSInteger intTime;
+    NSInteger fireDateModifier;
     NSDate *fireDate;
     IBOutlet UIButton *buttonReminder;
+    IBOutlet UIPickerView *reminderPicker;
     
 }
 

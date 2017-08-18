@@ -16,15 +16,14 @@
     
 @private
     NSArray *numbers;
-    NSArray *alphabet;  
-    NSString *postCode3;
-    NSString *postCode4;
-    NSString *postCode5;
-    NSString *postCode6;  
+    NSArray *alphabet;
+    NSString *postCode;
     NSMutableData *xmlData;
+    IBOutlet UILabel *screenText;
     IBOutlet UIButton *button;
     IBOutlet UIPickerView *postcodePicker;
     bool awaitingResponse;
+    UIActivityIndicatorView *indicator;
 }
 
 - (IBAction)submitPostCode:(id)sender;

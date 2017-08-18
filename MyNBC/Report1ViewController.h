@@ -16,8 +16,8 @@
     IBOutlet UIImageView *displayImage;
     NSMutableArray *problemDescriptionArray;
     NSMutableArray *problemNumberArray;
-    NSInteger problemSelection;
     IBOutlet UIButton *button;
+    IBOutlet UIPickerView *problemPicker;
     
 }
 

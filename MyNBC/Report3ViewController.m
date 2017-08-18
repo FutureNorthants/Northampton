@@ -39,21 +39,42 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
     NSData * imageData = [defaults objectForKey:@"ImageData"];
     image.image=[UIImage imageWithData:imageData];
-    [[usebutton layer] setCornerRadius:8.0f];
-    [[usebutton layer] setMasksToBounds:YES];
-    [[usebutton layer] setBorderWidth:1.0f];
-    [[usebutton layer] setBackgroundColor:[[UIColor colorWithRed:142/255.0
-                                                               green:191/255.0
-                                                                blue:12/255.0
-                                                               alpha:1.0] CGColor]];
     
-    [[reselectbutton layer] setCornerRadius:8.0f];
-    [[reselectbutton layer] setMasksToBounds:YES];
-    [[reselectbutton layer] setBorderWidth:1.0f];
-    [[reselectbutton layer] setBackgroundColor:[[UIColor colorWithRed:226/255.0
-                                                               green:34/255.0
-                                                                blue:8/255.0
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [image setCenter:CGPointMake(162,195)];
+            [usebutton setCenter:CGPointMake(160,418)];
+        }else{
+            [image setCenter:CGPointMake(162,200)];
+            [usebutton setCenter:CGPointMake(160,418)];       }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [image setCenter:CGPointMake(162,155)];
+            [usebutton setCenter:CGPointMake(160,330)];
+        }
+    }
+
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        usebutton.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+        [usebutton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [usebutton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[usebutton layer] setCornerRadius:8.0f];
+        [[usebutton layer] setMasksToBounds:YES];
+    }else{
+        
+        [[usebutton layer] setCornerRadius:8.0f];
+        [[usebutton layer] setMasksToBounds:YES];
+        [[usebutton layer] setBorderWidth:1.0f];
+        [[usebutton layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                               green:30/255.0
+                                                                blue:72/255.0
                                                                alpha:1.0] CGColor]];
+    }
 
 }
 

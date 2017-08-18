@@ -40,15 +40,35 @@
 {
     [super viewDidLoad];
     self.navigationItem.title=@"What is the problem?";
+        
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+        [[button layer] setCornerRadius:8.0f];
+        [[button layer] setMasksToBounds:YES];
+        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    }else{
+        [[button layer] setCornerRadius:8.0f];
+        [[button layer] setMasksToBounds:YES];
+        [[button layer] setBorderWidth:1.0f];
+        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
+                                                            green:30/255.0
+                                                             blue:72/255.0
+                                                            alpha:1.0] CGColor]];
+    }
     
-    [[button layer] setCornerRadius:8.0f];
-    [[button layer] setMasksToBounds:YES];
-    [[button layer] setBorderWidth:1.0f];
-    [[button layer] setBackgroundColor:[[UIColor colorWithRed:75/255.0
-                                                       green:172/255.0
-                                                        blue:198/255.0
-                                                       alpha:1.0] CGColor]];
-    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        [problemPicker setCenter:CGPointMake(160,220)];
+        [button setCenter:CGPointMake(160,418)];
+    }
+    else // 3.5 inch
+    {
+        [button setCenter:CGPointMake(160,330)];
+    }
+        
     problemDescriptionArray = [[NSMutableArray alloc] init];
     problemNumberArray = [[NSMutableArray alloc] init];
 
@@ -93,11 +113,14 @@
 	AudioServicesPlaySystemSound(klick);
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
-    [defaults setObject:[problemNumberArray objectAtIndex:problemSelection] forKey:@"ProblemNumber"];    
+    [defaults setObject:[problemNumberArray objectAtIndex:[problemPicker selectedRowInComponent:0]] forKey:@"ProblemNumber"];    
     [defaults synchronize]; 
  
     Report5ViewController *vcReport5 = [[Report5ViewController alloc] initWithNibName:@"Report5ViewController" bundle:nil];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        [backButton setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
+    }
     self.navigationItem.backBarButtonItem = backButton;
     [backButton release];
     [self.navigationController pushViewController:vcReport5 animated:YES];
@@ -116,12 +139,6 @@
 {
     return [problemDescriptionArray objectAtIndex:row];
 }
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    problemSelection = row;
-}
-
 
 #pragma mark - Core Data stack
 
@@ -177,6 +194,11 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (void)showAboutPage
+{
+    NSLog(@"pressed");
 }
 
 @end

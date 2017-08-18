@@ -16,8 +16,8 @@
     NSString *section;
     NSMutableArray *reasonsExtArray;
     NSMutableArray *reasonsIntArray;
+    IBOutlet UIPickerView *optionPicker;
     IBOutlet UIButton *button;
-    NSInteger wheelSelection;
     NSString *pageTitle;
 }
 

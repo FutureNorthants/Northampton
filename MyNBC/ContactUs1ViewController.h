@@ -15,7 +15,7 @@
     
     NSMutableArray *servicesIntArray;
     NSMutableArray *servicesExtArray;
-    NSInteger serviceSelection;
+    IBOutlet UIPickerView *optionPicker;
     IBOutlet UIButton *button;
 }
 

@@ -41,11 +41,33 @@
     self.navigationItem.title=@"Your message";
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] 
                                    initWithTitle:@"Next"                                            
-                                   style:UIBarButtonItemStyleBordered 
+                                   style:UIBarButtonItemStylePlain
                                    target:self 
                                    action:@selector(setContactText:)];
     self.navigationItem.rightBarButtonItem = sendButton;
     [sendButton release];
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            CGRect frameRect = textView.frame;
+            frameRect.size.height = 360;
+            textView.frame = frameRect;
+            [textView setCenter:CGPointMake(160,175)];
+        }else{
+            CGRect frameRect = textView.frame;
+            frameRect.size.height = 296;
+            textView.frame = frameRect;
+            [textView setCenter:CGPointMake(160,143)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [textView setCenter:CGPointMake(160,100)];
+        }
+    }
 }
 
 - (void)viewDidUnload
@@ -93,6 +115,11 @@
 
 - (void)viewWillAppear:(BOOL)flag {
     [super viewWillAppear:flag];
+    [textView becomeFirstResponder];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [textView becomeFirstResponder];
 }
 

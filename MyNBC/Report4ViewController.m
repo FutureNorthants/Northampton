@@ -39,12 +39,30 @@
     self.navigationItem.title=@"Any details?";
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] 
                                    initWithTitle:@"Next"                                            
-                                   style:UIBarButtonItemStyleBordered 
+                                   style:UIBarButtonItemStylePlain
                                    target:self 
                                    action:@selector(setDetails:)];
     self.navigationItem.rightBarButtonItem = sendButton;
     [sendButton release];
     textView.returnKeyType = UIReturnKeyDone;
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+              [self.view setBackgroundColor:[UIColor whiteColor]];
+              [textView setCenter:CGPointMake(160,135)];
+        }else{
+              [textView setCenter:CGPointMake(160,140)];
+        }
+    }
+    else // 3.5 inch
+    {
+        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+            [self.view setBackgroundColor:[UIColor whiteColor]];
+            [textView setCenter:CGPointMake(160,100)];
+        }
+    }
+
 }
 
 - (void)viewDidUnload
