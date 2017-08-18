@@ -91,6 +91,7 @@
 		34C2424014B76DB6009768BD /* ContactUs1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C2423E14B76DB6009768BD /* ContactUs1ViewController.m */; };
 		34C2424114B76DB6009768BD /* ContactUs1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C2423F14B76DB6009768BD /* ContactUs1ViewController.xib */; };
 		34C6B2E8151C9B3F0025F2D7 /* MyNBC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34C6B2E6151C9B3F0025F2D7 /* MyNBC.xcdatamodeld */; };
+		34CB32221F47315E0066732B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CB32211F47315E0066732B /* XCTest.framework */; };
 		34CE1701147AA7FD00A16092 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE1700147AA7FD00A16092 /* UIKit.framework */; };
 		34CE1703147AA7FD00A16092 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE1702147AA7FD00A16092 /* Foundation.framework */; };
 		34CE1705147AA7FD00A16092 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE1704147AA7FD00A16092 /* CoreGraphics.framework */; };
@@ -101,9 +102,6 @@
 		34CE1727147AA7FD00A16092 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE1700147AA7FD00A16092 /* UIKit.framework */; };
 		34CE1728147AA7FD00A16092 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE1702147AA7FD00A16092 /* Foundation.framework */; };
 		34CE1729147AA7FD00A16092 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE1704147AA7FD00A16092 /* CoreGraphics.framework */; };
-		34CE1731147AA7FD00A16092 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34CE172F147AA7FD00A16092 /* InfoPlist.strings */; };
-		34CE1734147AA7FD00A16092 /* MyNBCTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 34CE1733147AA7FD00A16092 /* MyNBCTests.h */; };
-		34CE1736147AA7FD00A16092 /* MyNBCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CE1735147AA7FD00A16092 /* MyNBCTests.m */; };
 		34E9F92617F1B96800B66358 /* social4-0.html in Resources */ = {isa = PBXBuildFile; fileRef = 34E9F92517F1B96800B66358 /* social4-0.html */; };
 /* End PBXBuildFile section */
 
@@ -232,6 +230,8 @@
 		34C2423E14B76DB6009768BD /* ContactUs1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUs1ViewController.m; sourceTree = "<group>"; };
 		34C2423F14B76DB6009768BD /* ContactUs1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactUs1ViewController.xib; sourceTree = "<group>"; };
 		34C6B2E7151C9B3F0025F2D7 /* MyNBC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyNBC.xcdatamodel; sourceTree = "<group>"; };
+		34CB32211F47315E0066732B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		34CB32231F4734C40066732B /* Northampton.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Northampton.xcdatamodel; sourceTree = "<group>"; };
 		34CE16FC147AA7FD00A16092 /* Northampton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Northampton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34CE1700147AA7FD00A16092 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34CE1702147AA7FD00A16092 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -244,11 +244,6 @@
 		34CE1710147AA7FD00A16092 /* MyNBCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNBCAppDelegate.m; sourceTree = "<group>"; };
 		34CE1713147AA7FD00A16092 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		34CE1726147AA7FD00A16092 /* NorthamptonTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NorthamptonTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		34CE172E147AA7FD00A16092 /* NorthamptonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NorthamptonTests-Info.plist"; sourceTree = "<group>"; };
-		34CE1730147AA7FD00A16092 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		34CE1732147AA7FD00A16092 /* NorthamptonTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NorthamptonTests-Prefix.pch"; sourceTree = "<group>"; };
-		34CE1733147AA7FD00A16092 /* MyNBCTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNBCTests.h; sourceTree = "<group>"; };
-		34CE1735147AA7FD00A16092 /* MyNBCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNBCTests.m; sourceTree = "<group>"; };
 		34E9F92517F1B96800B66358 /* social4-0.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "social4-0.html"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34CB32221F47315E0066732B /* XCTest.framework in Frameworks */,
 				34CE1727147AA7FD00A16092 /* UIKit.framework in Frameworks */,
 				34CE1728147AA7FD00A16092 /* Foundation.framework in Frameworks */,
 				34CE1729147AA7FD00A16092 /* CoreGraphics.framework in Frameworks */,
@@ -434,7 +430,6 @@
 				349E9B8B1553E7E000400EF5 /* MapKit.framework */,
 				34491E5514DAD5580095E48D /* CoreData.framework */,
 				34CE1706147AA7FD00A16092 /* Northampton */,
-				34CE172C147AA7FD00A16092 /* NorthamptonTests */,
 				34CE16FF147AA7FD00A16092 /* Frameworks */,
 				34CE16FD147AA7FD00A16092 /* Products */,
 			);
@@ -452,6 +447,7 @@
 		34CE16FF147AA7FD00A16092 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34CB32211F47315E0066732B /* XCTest.framework */,
 				34CE1700147AA7FD00A16092 /* UIKit.framework */,
 				34CE1702147AA7FD00A16092 /* Foundation.framework */,
 				34CE1704147AA7FD00A16092 /* CoreGraphics.framework */,
@@ -487,27 +483,6 @@
 				34E9F92517F1B96800B66358 /* social4-0.html */,
 				347527011546EB2B0088802A /* contacts.xml */,
 				342788BC158B94A700EAD217 /* button-20.wav */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		34CE172C147AA7FD00A16092 /* NorthamptonTests */ = {
-			isa = PBXGroup;
-			children = (
-				34CE1733147AA7FD00A16092 /* MyNBCTests.h */,
-				34CE1735147AA7FD00A16092 /* MyNBCTests.m */,
-				34CE172D147AA7FD00A16092 /* Supporting Files */,
-			);
-			name = NorthamptonTests;
-			path = MyNBCTests;
-			sourceTree = "<group>";
-		};
-		34CE172D147AA7FD00A16092 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				34CE172E147AA7FD00A16092 /* NorthamptonTests-Info.plist */,
-				34CE172F147AA7FD00A16092 /* InfoPlist.strings */,
-				34CE1732147AA7FD00A16092 /* NorthamptonTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -570,6 +545,10 @@
 								enabled = 1;
 							};
 						};
+					};
+					34CE1725147AA7FD00A16092 = {
+						DevelopmentTeam = F7PC5RMD57;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -653,8 +632,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34CE1731147AA7FD00A16092 /* InfoPlist.strings in Resources */,
-				34CE1734147AA7FD00A16092 /* MyNBCTests.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,7 +696,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34CE1736147AA7FD00A16092 /* MyNBCTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,14 +724,6 @@
 				34CE1713147AA7FD00A16092 /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		34CE172F147AA7FD00A16092 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				34CE1730147AA7FD00A16092 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -849,6 +817,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MyNBC.app/MyNBC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = F7PC5RMD57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -863,6 +833,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Northampton-Borough-Council.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NorthamptonTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -873,6 +844,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MyNBC.app/MyNBC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = F7PC5RMD57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -887,6 +860,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Northampton-Borough-Council.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NorthamptonTests;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -928,6 +903,7 @@
 		34C6B2E6151C9B3F0025F2D7 /* MyNBC.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				34CB32231F4734C40066732B /* Northampton.xcdatamodel */,
 				34C6B2E7151C9B3F0025F2D7 /* MyNBC.xcdatamodel */,
 			);
 			currentVersion = 34C6B2E7151C9B3F0025F2D7 /* MyNBC.xcdatamodel */;
