@@ -44,58 +44,62 @@
     self.navigationItem.title=@"And the subject?";
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [button setCenter:CGPointMake(160,330)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
         [optionPicker setCenter:CGPointMake(160,220)];
         [button setCenter:CGPointMake(160,418)];
     }
-    else // 3.5 inch
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        [button setCenter:CGPointMake(160,330)];
+        [optionPicker setCenter:CGPointMake(160,270)];
+        [button setCenter:CGPointMake(188,468)];
     }
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [optionPicker setCenter:CGPointMake(160,300)];
+        [button setCenter:CGPointMake(207,498)];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults objectForKey:@"ContactServiceArea"]){
-        serviceArea=[defaults objectForKey:@"ContactServiceArea"]; 
+        serviceArea=[defaults objectForKey:@"ContactServiceArea"];
     }
     if([defaults objectForKey:@"ContactSection"]){
-        section=[defaults objectForKey:@"ContactSection"]; 
+        section=[defaults objectForKey:@"ContactSection"];
     }
-
+    
     reasonsExtArray = [[NSMutableArray alloc] init];
     reasonsIntArray = [[NSMutableArray alloc] init];
     
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        [[button layer] setBorderWidth:1.0f];
-        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                            green:30/255.0
-                                                             blue:72/255.0
-                                                            alpha:1.0] CGColor]];
-    }
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[button layer] setCornerRadius:8.0f];
+    [[button layer] setMasksToBounds:YES];
+    button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
     
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setResultType:NSDictionaryResultType];
-    NSEntityDescription *entity = [NSEntityDescription 
+    NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"ContactOptions" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];   
+    [fetchRequest setEntity:entity];
     NSDictionary *entityProperties = [entity propertiesByName];
     [fetchRequest setReturnsDistinctResults:true];
     [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:[entityProperties objectForKey:@"SectionExt"],
-                                                                 [entityProperties objectForKey:@"ReasonExt"],
-                                                                 [entityProperties objectForKey:@"ReasonInt"], 
-                                        nil]];    
+                                        [entityProperties objectForKey:@"ReasonExt"],
+                                        [entityProperties objectForKey:@"ReasonInt"],
+                                        nil]];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
                                         initWithKey:@"ReasonExt" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -108,10 +112,10 @@
         [reasonsExtArray addObject:[info valueForKey:@"ReasonExt"]];
         [reasonsIntArray addObject:[info valueForKey:@"ReasonInt"]];
     }
-    [fetchRequest release];  
+    [fetchRequest release];
     [reasonsExtArray retain];
     [reasonsIntArray retain];
-
+    
 }
 
 - (void)viewDidUnload
@@ -142,9 +146,9 @@
     SystemSoundID klick;
     AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
     AudioServicesPlaySystemSound(klick);
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
-    [defaults setObject:[reasonsIntArray objectAtIndex:[optionPicker selectedRowInComponent:0]] forKey:@"ContactReason"];    
-    [defaults synchronize]; 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[reasonsIntArray objectAtIndex:[optionPicker selectedRowInComponent:0]] forKey:@"ContactReason"];
+    [defaults synchronize];
     ContactUs4ViewController *vcContact4 = [[ContactUs4ViewController alloc] initWithNibName:@"ContactUs4ViewController" bundle:nil];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
@@ -181,7 +185,7 @@
     NSURL *momURL = [NSURL fileURLWithPath:path];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
     
-    return _managedObjectModel; 
+    return _managedObjectModel;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
@@ -198,7 +202,7 @@
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
     {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }    
+    }
     
     return _persistentStoreCoordinator;
 }

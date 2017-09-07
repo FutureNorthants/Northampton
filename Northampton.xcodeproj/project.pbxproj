@@ -55,6 +55,7 @@
 		34782926154E960F00BB2982 /* ServerResponseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34782924154E960F00BB2982 /* ServerResponseViewController.xib */; };
 		347E6AB8149C02760030BA4E /* BinFinder4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347E6AB6149C02760030BA4E /* BinFinder4ViewController.m */; };
 		347E6AB9149C02760030BA4E /* BinFinder4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 347E6AB7149C02760030BA4E /* BinFinder4ViewController.xib */; };
+		347E98A51F59A3F40093FE26 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 347E98A41F59A3F40093FE26 /* Images.xcassets */; };
 		34849E8415547FB10017EEF7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34849E8315547FB10017EEF7 /* QuartzCore.framework */; };
 		3489875614BAEE27002A882A /* ContactUs3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3489875414BAEE27002A882A /* ContactUs3ViewController.m */; };
 		3489875714BAEE27002A882A /* ContactUs3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3489875514BAEE27002A882A /* ContactUs3ViewController.xib */; };
@@ -88,6 +89,7 @@
 		34A415D0156BF7080005B69D /* BinFinder5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A415C8156BF7080005B69D /* BinFinder5ViewController.m */; };
 		34A415D1156BF7080005B69D /* BinFinder1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34A415CA156BF7080005B69D /* BinFinder1ViewController.xib */; };
 		34A415D2156BF7080005B69D /* BinFinder1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A415CB156BF7080005B69D /* BinFinder1ViewController.m */; };
+		34C004EE1F599A9C00B24901 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34C004ED1F599A9C00B24901 /* Launch Screen.storyboard */; };
 		34C2424014B76DB6009768BD /* ContactUs1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C2423E14B76DB6009768BD /* ContactUs1ViewController.m */; };
 		34C2424114B76DB6009768BD /* ContactUs1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C2423F14B76DB6009768BD /* ContactUs1ViewController.xib */; };
 		34C6B2E8151C9B3F0025F2D7 /* MyNBC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34C6B2E6151C9B3F0025F2D7 /* MyNBC.xcdatamodeld */; };
@@ -181,6 +183,7 @@
 		347E6AB5149C02760030BA4E /* BinFinder4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinFinder4ViewController.h; sourceTree = "<group>"; };
 		347E6AB6149C02760030BA4E /* BinFinder4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinFinder4ViewController.m; sourceTree = "<group>"; };
 		347E6AB7149C02760030BA4E /* BinFinder4ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BinFinder4ViewController.xib; sourceTree = "<group>"; };
+		347E98A41F59A3F40093FE26 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Northampton/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		34849E8315547FB10017EEF7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3489875314BAEE27002A882A /* ContactUs3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUs3ViewController.h; sourceTree = "<group>"; };
 		3489875414BAEE27002A882A /* ContactUs3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUs3ViewController.m; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 		34A415CA156BF7080005B69D /* BinFinder1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BinFinder1ViewController.xib; sourceTree = "<group>"; };
 		34A415CB156BF7080005B69D /* BinFinder1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinFinder1ViewController.m; sourceTree = "<group>"; };
 		34A415CC156BF7080005B69D /* BinFinder1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinFinder1ViewController.h; sourceTree = "<group>"; };
+		34C004ED1F599A9C00B24901 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		34C2423D14B76DB6009768BD /* ContactUs1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUs1ViewController.h; sourceTree = "<group>"; };
 		34C2423E14B76DB6009768BD /* ContactUs1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUs1ViewController.m; sourceTree = "<group>"; };
 		34C2423F14B76DB6009768BD /* ContactUs1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactUs1ViewController.xib; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 		34CE16F1147AA7FD00A16092 = {
 			isa = PBXGroup;
 			children = (
+				34C004ED1F599A9C00B24901 /* Launch Screen.storyboard */,
 				349C3F0E17E89BB2004CA967 /* Default-568h@2x.png */,
 				3436855A1567B6BF00DF604F /* SystemConfiguration.framework */,
 				341A48FE155DC80100A00D20 /* AddressBookUI.framework */,
@@ -464,6 +469,7 @@
 				3464077B148D22BA0035BAF4 /* XIB */,
 				3464077A148D22930035BAF4 /* Images */,
 				3464077E148D24310035BAF4 /* Misc */,
+				347E98A41F59A3F40093FE26 /* Images.xcassets */,
 				34CE1707147AA7FD00A16092 /* Supporting Files */,
 			);
 			name = Northampton;
@@ -604,6 +610,7 @@
 				3493E69B14F80D5100FFDA21 /* MyDetailsPostcodeViewController.xib in Resources */,
 				345F03DF152C40190029A124 /* Report1ViewController.xib in Resources */,
 				3405CE73180809EE0090FA31 /* services@2x.png in Resources */,
+				347E98A51F59A3F40093FE26 /* Images.xcassets in Resources */,
 				347527021546EB2B0088802A /* contacts.xml in Resources */,
 				341E0B561548315400CF1371 /* problems.xml in Resources */,
 				3405CE76180809EE0090FA31 /* contact.png in Resources */,
@@ -611,6 +618,7 @@
 				34A3CF1E154961E1006695A4 /* Report2ViewController.xib in Resources */,
 				341F0A22154AA9AF004E6A05 /* Report3ViewController.xib in Resources */,
 				341F0A28154B01FE004E6A05 /* Report4ViewController.xib in Resources */,
+				34C004EE1F599A9C00B24901 /* Launch Screen.storyboard in Resources */,
 				34A052B5184650300015DD16 /* Default~iphone.png in Resources */,
 				34782926154E960F00BB2982 /* ServerResponseViewController.xib in Resources */,
 				3466AB2C1552DFF900A9339D /* MyDetailsPhoneViewController.xib in Resources */,
@@ -744,8 +752,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "911049fb-794a-495c-9acb-ba69ee4672a0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "911049fb-794a-495c-9acb-ba69ee4672a0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 			};
@@ -762,10 +770,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "bf8c48b4-82dd-4685-9efc-65c20523f0d9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1657AB0F-24E7-412F-950E-0AC6473C1B03";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 			};
 			name = Release;
 		};
@@ -773,6 +781,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Northampton.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -794,6 +804,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Northampton.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -806,7 +818,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.northampton.northampton;
 				PRODUCT_NAME = Northampton;
 				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -826,12 +838,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyNBCTests/NorthamptonTests-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "MyNBCTests/NorthamptonTests-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MyNBC/Northampton-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Northampton-Borough-Council.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.northampton.northampton;
 				PRODUCT_NAME = NorthamptonTests;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -853,12 +866,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyNBCTests/NorthamptonTests-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "MyNBCTests/NorthamptonTests-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MyNBC/Northampton-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Northampton-Borough-Council.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.gov.northampton.northampton;
 				PRODUCT_NAME = NorthamptonTests;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -43,47 +43,44 @@
 {
     [super viewDidLoad];
     
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        [[button layer] setBorderWidth:1.0f];
-        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                            green:30/255.0
-                                                             blue:72/255.0
-                                                            alpha:1.0] CGColor]];
-    }
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[button layer] setCornerRadius:8.0f];
+    [[button layer] setMasksToBounds:YES];
+    button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [mapSwitch setCenter:CGPointMake(160,17)];
+        mapView.frame = CGRectMake(0, 35, 320, 375);
+        [button setCenter:CGPointMake(160,330)];
+    }
     
     if (screenBounds.size.height == 568) // 4 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [mapSwitch setCenter:CGPointMake(160,17)];
-            mapView.frame = CGRectMake(0, 35, 320, 370);
-            [button setCenter:CGPointMake(160,418)];
-        }else{
-            mapView.frame = CGRectMake(0, 30, 320, 355);
-            [button setCenter:CGPointMake(160,418)];
-        }
+        [mapSwitch setCenter:CGPointMake(160,17)];
+        mapView.frame = CGRectMake(0, 35, 320, 370);
+        [button setCenter:CGPointMake(160,418)];
     }
-    else // 3.5 inch
+    
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-          [mapSwitch setCenter:CGPointMake(160,17)];
-           mapView.frame = CGRectMake(0, 35, 320, 375);
-            [button setCenter:CGPointMake(160,330)];
-        }else{
-           mapView.frame = CGRectMake(0, 32, 320, 360);
-          [button setCenter:CGPointMake(160,330)];
-        }
+        [mapSwitch setCenter:CGPointMake(188,17)];
+        mapView.frame = CGRectMake(0, 35, 320, 370);
+        [button setCenter:CGPointMake(188,517)];
     }
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [mapSwitch setCenter:CGPointMake(207,17)];
+        mapView.frame = CGRectMake(0, 35, 320, 370);
+        [button setCenter:CGPointMake(207,586)];
+    }
+    
     
     showNormalMap=true;
     
@@ -91,7 +88,7 @@
     problemLocation.latitude=52.23717;
     problemLocation.longitude=-0.894828;
     
-    span.latitudeDelta=0.05;  
+    span.latitudeDelta=0.05;
     span.longitudeDelta=0.05;
     
     region.span=span;
@@ -99,10 +96,15 @@
     
     [mapView setRegion:region animated:TRUE];
     [mapView regionThatFits:region];
-     
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    [annotation setCoordinate:problemLocation];
+    [self.mapView addAnnotation:annotation];
+    
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager requestWhenInUseAuthorization];
     [locationManager startUpdatingLocation];
 }
 
@@ -118,14 +120,14 @@
 
 - (IBAction)setLocation {
     SystemSoundID klick;
-	AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
-	AudioServicesPlaySystemSound(klick);
+    AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
+    AudioServicesPlaySystemSound(klick);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *latitude = [[[NSString alloc] initWithFormat:@"%g", problemLocation.latitude]autorelease];
     NSString *longitude = [[[NSString alloc] initWithFormat:@"%g", problemLocation.longitude]autorelease];
     [defaults setObject:latitude forKey:@"ProblemLatitude"];
     [defaults setObject:longitude forKey:@"ProblemLongitude"];
-    [defaults synchronize]; 
+    [defaults synchronize];
     Report2ViewController *vcReport2 = [[Report2ViewController alloc] initWithNibName:@"Report2ViewController" bundle:nil];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
@@ -153,7 +155,7 @@
         region.center=problemLocation;
         [mapView setRegion:region animated:TRUE];
         [mapView regionThatFits:region];
-
+        
     }
 }
 

@@ -46,21 +46,25 @@
     [sendButton release];
     textView.returnKeyType = UIReturnKeyDone;
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [textView setCenter:CGPointMake(160,100)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-              [self.view setBackgroundColor:[UIColor whiteColor]];
-              [textView setCenter:CGPointMake(160,135)];
-        }else{
-              [textView setCenter:CGPointMake(160,140)];
-        }
+        [textView setCenter:CGPointMake(160,135)];
     }
-    else // 3.5 inch
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [self.view setBackgroundColor:[UIColor whiteColor]];
-            [textView setCenter:CGPointMake(160,100)];
-        }
+        [textView setCenter:CGPointMake(187,135)];
+    }
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [textView setCenter:CGPointMake(207,135)];
     }
 
 }

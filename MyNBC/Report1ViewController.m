@@ -40,49 +40,54 @@
 {
     [super viewDidLoad];
     self.navigationItem.title=@"What is the problem?";
-        
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        [[button layer] setBorderWidth:1.0f];
-        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                            green:30/255.0
-                                                             blue:72/255.0
-                                                            alpha:1.0] CGColor]];
-    }
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[button layer] setCornerRadius:8.0f];
+    [[button layer] setMasksToBounds:YES];
+    button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [button setCenter:CGPointMake(160,330)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
         [problemPicker setCenter:CGPointMake(160,220)];
         [button setCenter:CGPointMake(160,418)];
     }
-    else // 3.5 inch
+    
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        [button setCenter:CGPointMake(160,330)];
+        [problemPicker setCenter:CGPointMake(187,258)];
+        [button setCenter:CGPointMake(187,517)];
     }
-        
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [problemPicker setCenter:CGPointMake(207,293)];
+        [button setCenter:CGPointMake(207,586)];
+    }
+    
     problemDescriptionArray = [[NSMutableArray alloc] init];
     problemNumberArray = [[NSMutableArray alloc] init];
-
+    
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setResultType:NSDictionaryResultType];
-    NSEntityDescription *entity = [NSEntityDescription 
+    NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"Problems" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];   
+    [fetchRequest setEntity:entity];
     NSDictionary *entityProperties = [entity propertiesByName];
     [fetchRequest setReturnsDistinctResults:true];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:[entityProperties objectForKey:@"ProblemDescription"],[entityProperties objectForKey:@"ProblemNumber"], nil]];    
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObjects:[entityProperties objectForKey:@"ProblemDescription"],[entityProperties objectForKey:@"ProblemNumber"], nil]];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
                                         initWithKey:@"ProblemDescription" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -93,7 +98,7 @@
         [problemDescriptionArray addObject:[info valueForKey:@"ProblemDescription"]];
         [problemNumberArray addObject:[info valueForKey:@"ProblemNumber"]];
     }
-    [fetchRequest release];    
+    [fetchRequest release];
 }
 
 - (void)viewDidUnload
@@ -106,16 +111,16 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(IBAction)submitProblemType:(id)sender{  
+-(IBAction)submitProblemType:(id)sender{
     
     SystemSoundID klick;
-	AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
-	AudioServicesPlaySystemSound(klick);
+    AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
+    AudioServicesPlaySystemSound(klick);
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
-    [defaults setObject:[problemNumberArray objectAtIndex:[problemPicker selectedRowInComponent:0]] forKey:@"ProblemNumber"];    
-    [defaults synchronize]; 
- 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[problemNumberArray objectAtIndex:[problemPicker selectedRowInComponent:0]] forKey:@"ProblemNumber"];
+    [defaults synchronize];
+    
     Report5ViewController *vcReport5 = [[Report5ViewController alloc] initWithNibName:@"Report5ViewController" bundle:nil];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
@@ -168,7 +173,7 @@
     NSURL *momURL = [NSURL fileURLWithPath:path];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
     
-    return _managedObjectModel; 
+    return _managedObjectModel;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
@@ -184,7 +189,7 @@
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
     {
-    }    
+    }
     
     return _persistentStoreCoordinator;
 }

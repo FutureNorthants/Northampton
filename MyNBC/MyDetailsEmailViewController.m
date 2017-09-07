@@ -29,7 +29,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     }
-    return self;  
+    return self;
 }
 
 - (void)dealloc
@@ -50,23 +50,27 @@
     self.navigationItem.title=@"My Email Address";
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [textView setCenter:CGPointMake(160,75)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [self.view setBackgroundColor:[UIColor whiteColor]];
-            [textView setCenter:CGPointMake(160,125)];
-        }else{
-            [textView setCenter:CGPointMake(160,125)];
-        }
+        [textView setCenter:CGPointMake(160,125)];
     }
-    else // 3.5 inch
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [self.view setBackgroundColor:[UIColor whiteColor]];
-            [textView setCenter:CGPointMake(160,75)];
-        }
+        [textView setCenter:CGPointMake(188,175)];
     }
-
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [textView setCenter:CGPointMake(207,205)];
+    }
     
     textView.returnKeyType = UIReturnKeyDone;
 }
@@ -78,10 +82,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults objectForKey:@"EmailAddress"]){
-       textView.text=[defaults objectForKey:@"EmailAddress"]; 
-    } 
+        textView.text=[defaults objectForKey:@"EmailAddress"];
+    }
 }
 
 
@@ -96,10 +100,10 @@
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
-{    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
-    [defaults setObject:textField.text forKey:@"EmailAddress"];    
-    [defaults synchronize];     
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:textField.text forKey:@"EmailAddress"];
+    [defaults synchronize];
     if(fromReport||fromContact){
         ServerResponseViewController *vcServer = [[ServerResponseViewController alloc] initWithNibName:@"ServerResponseViewController" bundle:nil fromReport:fromReport fromContact:fromContact];
         [self.navigationController pushViewController:vcServer animated:YES];

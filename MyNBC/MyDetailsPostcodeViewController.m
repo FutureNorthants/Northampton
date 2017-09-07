@@ -46,44 +46,41 @@
     [super viewDidLoad];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    if (screenBounds.size.height == 568) // 4 inch
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [postcodePicker setCenter:CGPointMake(160,220)];
-            [button setCenter:CGPointMake(160,418)];
-        }else{
-            [postcodePicker setCenter:CGPointMake(160,220)];
-            [button setCenter:CGPointMake(160,418)];
-        }
-    }
-    else // 3.5 inch
-    {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [postcodePicker setCenter:CGPointMake(160,148)];
-            [button setCenter:CGPointMake(160,330)];
-        }
-    }
-
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        [[button layer] setBorderWidth:1.0f];
-        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                            green:30/255.0
-                                                             blue:72/255.0
-                                                            alpha:1.0] CGColor]];
+        [postcodePicker setCenter:CGPointMake(160,148)];
+        [button setCenter:CGPointMake(160,330)];
     }
     
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        [postcodePicker setCenter:CGPointMake(160,220)];
+        [button setCenter:CGPointMake(160,418)];
+    }
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
+    {
+        [postcodePicker setCenter:CGPointMake(160,270)];
+        [button setCenter:CGPointMake(188,468)];
+    }
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [postcodePicker setCenter:CGPointMake(160,300)];
+        [button setCenter:CGPointMake(207,498)];
+    }
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[button layer] setCornerRadius:8.0f];
+    [[button layer] setMasksToBounds:YES];
+    button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    
     numbers = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",nil];
-    alphabet = [[NSArray alloc] initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",nil]; 
-
+    alphabet = [[NSArray alloc] initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",nil];
+    
     self.navigationItem.title=@"My Postcode";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -99,8 +96,8 @@
         [postcodePicker selectRow:[alphabet indexOfObject: @"D"] inComponent:4 animated:YES];
         [postcodePicker selectRow:[alphabet indexOfObject: @"E"] inComponent:5 animated:YES];
     }
-
-
+    
+    
 }
 
 - (void)viewDidUnload
@@ -161,7 +158,7 @@
         case 3:
             return [numbers objectAtIndex:row];
             break;
-        case 4:            
+        case 4:
             return [alphabet objectAtIndex:row];
             break;
         case 5:
@@ -183,8 +180,8 @@
     NSString *temp4 = [temp3 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:4]]];
     postCode = [temp4 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:5]]];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:postCode forKey:@"Postcode"];    
-    [defaults synchronize]; 
+    [defaults setObject:postCode forKey:@"Postcode"];
+    [defaults synchronize];
     
     if(fromReport||fromContact){
         ResponseViewController *vcResponse = [[ResponseViewController alloc] initWithNibName:@"ResponseViewController" bundle:nil fromReport:fromReport fromContact:fromContact];
@@ -192,9 +189,9 @@
         self.navigationItem.backBarButtonItem = backButton;
         [backButton release];
         [self.navigationController pushViewController:vcResponse animated:YES];
-        [vcResponse release];    
+        [vcResponse release];
     }else {
-       [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-2] animated:YES];
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-2] animated:YES];
     }
 }
 

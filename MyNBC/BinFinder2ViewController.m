@@ -43,34 +43,37 @@
     self.navigationItem.title=@"Select Your Address";
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [button setCenter:CGPointMake(160,330)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
-            [addressPicker setCenter:CGPointMake(160,220)];
-            [button setCenter:CGPointMake(160,418)];
+        [addressPicker setCenter:CGPointMake(160,220)];
+        [button setCenter:CGPointMake(160,418)];
     }
-    else // 3.5 inch
+        
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [button setCenter:CGPointMake(160,330)];
-        }
+        [addressPicker setCenter:CGPointMake(188,290)];
+        [button setCenter:CGPointMake(188,517)];
     }
-
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        [[button layer] setBorderWidth:1.0f];
-        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                            green:30/255.0
-                                                             blue:72/255.0
-                                                            alpha:1.0] CGColor]];
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [addressPicker setCenter:CGPointMake(207,320)];
+        [button setCenter:CGPointMake(207,586)];
     }
+    
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[button layer] setCornerRadius:8.0f];
+    [[button layer] setMasksToBounds:YES];
+    button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
 }
 
 - (void)viewDidUnload
@@ -104,7 +107,7 @@
 - (IBAction)submitAddress:(id)sender{
     SystemSoundID klick;
     AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
-    AudioServicesPlaySystemSound(klick);  
+    AudioServicesPlaySystemSound(klick);
     BinFinder4ViewController *vcBin4 = [[BinFinder4ViewController alloc]initWithNibName:@"BinFinder4ViewController" bundle:nil data:addresses arrayEntry:currentAddressArrayEntry  postcodeParam:strPostcode];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;

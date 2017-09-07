@@ -47,38 +47,18 @@
                                    style:UIBarButtonItemStylePlain
                                    target:self
                                    action:@selector(refresh:)];
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-           [button setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
-        }
+        
+        [button setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
         
         self.navigationItem.leftBarButtonItem = button;
         [button release];
     }
     website = [[UIWebView alloc] init];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    if (screenBounds.size.height == 568) // 4 inch
+    if (screenBounds.size.height == 480) // 3.5 inch
     {
         if(homePage){
-            if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-                website.frame = CGRectMake(0, 0, 320, 519);
-            }else{
-                website.frame = CGRectMake(0, 0, 320, 458);
-            }
-    }else{
-        website.frame = CGRectMake(0, 0, 320, 458);
-    }
-        if(!homePage&&!addressSearch){
-            websiteUrl=@"social4-0";
-        }
-    }
-    else // 3.5 inch
-    {
-        if(homePage){
-            if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-                website.frame = CGRectMake(0, 0, 320, 431);
-            }else{
-                website.frame = CGRectMake(0, 0, 320, 370);
-            }
+            website.frame = CGRectMake(0, 0, 320, 431);
         }else{
             website.frame = CGRectMake(0, 0, 320, 370);
         }
@@ -86,11 +66,49 @@
             websiteUrl=@"social3-5";
         }
     }
+    
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        if(homePage){
+            website.frame = CGRectMake(0, 0, 320, 519);
+        }else{
+            website.frame = CGRectMake(0, 0, 320, 458);
+        }
+        if(!homePage&&!addressSearch){
+            websiteUrl=@"social4-0";
+        }
+    }
+    
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
+    {
+        if(homePage){
+            website.frame = CGRectMake(0, 0, 375, 618);
+        }else{
+            website.frame = CGRectMake(0, 0, 375, 557);
+        }
+        if(!homePage&&!addressSearch){
+            websiteUrl=@"social4-0";
+        }
+    }
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        if(homePage){
+            website.frame = CGRectMake(0, 0, 414, 687);
+        }else{
+            website.frame = CGRectMake(0, 0, 414, 626);
+        }
+        if(!homePage&&!addressSearch){
+            websiteUrl=@"social4-0";
+        }
+    }
+    
     self.website.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     [website setBackgroundColor:[UIColor colorWithRed:209/255.0
-                                                 green:211/255.0
-                                                  blue:212/255.0
-                                                 alpha:1.0]];
+                                                green:211/255.0
+                                                 blue:212/255.0
+                                                alpha:1.0]];
     [website setOpaque:NO];
     [website setDelegate:self];
     [[self view] addSubview:[self website]];
@@ -98,13 +116,13 @@
     if (!homePage&&!addressSearch) {
         NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3", @"UserAgent", nil];
         [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
-           [website loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:websiteUrl ofType:@"html"]isDirectory:NO]]];
-       [dictionary release];
+        [website loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:websiteUrl ofType:@"html"]isDirectory:NO]]];
+        [dictionary release];
     }else{
         NSURL *url = [[NSURL alloc] initWithString:websiteUrl];
         NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-       [website loadRequest:requestObj];
-       [url release];
+        [website loadRequest:requestObj];
+        [url release];
     }
 }
 

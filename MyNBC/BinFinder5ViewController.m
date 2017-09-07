@@ -67,40 +67,39 @@
     self.navigationItem.title=@"Select a Reminder";
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    if (screenBounds.size.height == 568) // 4 inch
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [reminderPicker setCenter:CGPointMake(160,220)];
-            [buttonReminder setCenter:CGPointMake(160,418)];
-        }else{
-            [reminderPicker setCenter:CGPointMake(160,220)];
-            [buttonReminder setCenter:CGPointMake(160,418)];
-        }
-    }
-    else // 3.5 inch
-    {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [reminderPicker setCenter:CGPointMake(160,147)];
-            [buttonReminder setCenter:CGPointMake(160,335)];
-        }
+        [reminderPicker setCenter:CGPointMake(160,147)];
+        [buttonReminder setCenter:CGPointMake(160,335)];
     }
     
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [buttonReminder setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [buttonReminder setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[buttonReminder layer] setCornerRadius:8.0f];
-        [[buttonReminder layer] setMasksToBounds:YES];
-        buttonReminder.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[buttonReminder layer] setCornerRadius:8.0f];
-        [[buttonReminder layer] setMasksToBounds:YES];
-        [[buttonReminder layer] setBorderWidth:1.0f];
-        [[buttonReminder layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                                    green:30/255.0
-                                                                     blue:72/255.0
-                                                                    alpha:1.0] CGColor]];
+    if (screenBounds.size.height == 568) // 4 inch
+    {
+        [reminderPicker setCenter:CGPointMake(160,220)];
+        [buttonReminder setCenter:CGPointMake(160,418)];
     }
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
+    {
+        [reminderPicker setCenter:CGPointMake(160,270)];
+        [buttonReminder setCenter:CGPointMake(188,468)];
+    }
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [reminderPicker setCenter:CGPointMake(160,300)];
+        [buttonReminder setCenter:CGPointMake(207,498)];
+    }
+    
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [buttonReminder setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [buttonReminder setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[buttonReminder layer] setCornerRadius:8.0f];
+    [[buttonReminder layer] setMasksToBounds:YES];
+    buttonReminder.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    
 }
 
 - (void)viewDidUnload
@@ -124,15 +123,15 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSInteger tempTime = intTime - (row * 100);
+    long tempTime = intTime - (row * 100);
     NSString *tempDay=@"";
     NSString *strTempTime=@"";
-
+    
     if(tempTime>1200){
         if(tempTime-1200<100){
-            strTempTime=@"00"; 
+            strTempTime=@"00";
         }else if(tempTime-1200<1000){
-            strTempTime=@"0"; 
+            strTempTime=@"0";
         }
         NSString *strTempTime2 = [strTempTime stringByAppendingString:[NSString stringWithFormat:@"%ld", (tempTime-1200)]];
         NSString *strTempTime3 = [[strTempTime2 substringWithRange:NSMakeRange(0, 2)] stringByAppendingString:@":"];
@@ -140,15 +139,15 @@
         tempDay=[strTempTime4 stringByAppendingString:strDay];
     }else{
         if(tempTime<100){
-            strTempTime=@"00"; 
+            strTempTime=@"00";
         }else if(tempTime<1000){
-            strTempTime=@"0"; 
+            strTempTime=@"0";
         }
         NSString *strTempTime2 = [strTempTime stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)tempTime]];
         NSString *strTempTime3 = [[strTempTime2 substringWithRange:NSMakeRange(0, 2)] stringByAppendingString:@":"];
         NSString *strTempTime4 = [strTempTime3 stringByAppendingString:[strTempTime2 substringWithRange:NSMakeRange(2, 2)]];
         tempDay=[strTempTime4 stringByAppendingString:strPreviousDay];
-        }
+    }
     return tempDay;
 }
 
@@ -161,7 +160,7 @@
     AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
     AudioServicesPlaySystemSound(klick);
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    NSDate *modifiedFireDate = [fireDate dateByAddingTimeInterval:60*60*fireDateModifier*-1];    
+    NSDate *modifiedFireDate = [fireDate dateByAddingTimeInterval:60*60*fireDateModifier*-1];
     UILocalNotification *localNotification = [[[UILocalNotification alloc] init]autorelease];
     localNotification.fireDate = modifiedFireDate;
     localNotification.alertBody = [NSString stringWithFormat:
@@ -170,11 +169,11 @@
     localNotification.applicationIconBadgeNumber = -1;
     localNotification.repeatInterval = NSCalendarUnitWeekOfYear;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-
+    
     UIAlertView  *alert = [[UIAlertView alloc] initWithTitle:@""
-                          message:@"Your reminder has  been set"
-                          delegate:self cancelButtonTitle:@"OK" 
-                          otherButtonTitles:nil];
+                                                     message:@"Your reminder has  been set"
+                                                    delegate:self cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
     
     [alert show];
     [alert release];

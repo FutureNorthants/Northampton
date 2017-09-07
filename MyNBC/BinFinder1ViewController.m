@@ -41,37 +41,44 @@
     awaitingResponse=false;
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [button setCenter:CGPointMake(160,330)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
         [screenText setCenter:CGPointMake(180,50)];
         [postcodePicker setCenter:CGPointMake(160,220)];
         [button setCenter:CGPointMake(160,418)];
     }
-    else // 3.5 inch
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        [button setCenter:CGPointMake(160,330)];
+        [screenText setCenter:CGPointMake(210,110)];
+        [postcodePicker setCenter:CGPointMake(188,290)];
+        [button setCenter:CGPointMake(188,517)];
     }
     
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [screenText setTextColor:[UIColor blackColor]];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[button layer] setCornerRadius:8.0f];
-        [[button layer] setMasksToBounds:YES];
-        [[button layer] setBorderWidth:1.0f];
-        [[button layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                            green:30/255.0
-                                                             blue:72/255.0
-                                                            alpha:1.0] CGColor]];
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [screenText setCenter:CGPointMake(230,140)];
+        [postcodePicker setCenter:CGPointMake(207,320)];
+        [button setCenter:CGPointMake(207,586)];
     }
     
-    numbers = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",nil]; 
-    alphabet = [[NSArray alloc] initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",nil]; 
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [screenText setTextColor:[UIColor blackColor]];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[button layer] setCornerRadius:8.0f];
+    [[button layer] setMasksToBounds:YES];
+    button.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    
+    numbers = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",nil];
+    alphabet = [[NSArray alloc] initWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z",nil];
     self.navigationItem.title=@"Find Your Bin Collection Day";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -87,7 +94,7 @@
         [postcodePicker selectRow:[alphabet indexOfObject: @"D"] inComponent:4 animated:YES];
         [postcodePicker selectRow:[alphabet indexOfObject: @"E"] inComponent:5 animated:YES];
     }
-
+    
 }
 
 - (void)viewDidUnload
@@ -126,7 +133,7 @@
         case 5:
             return 26;
             break;
-
+            
         default:
             return 0;
     }
@@ -148,7 +155,7 @@
         case 3:
             return [numbers objectAtIndex:row];
             break;
-        case 4:            
+        case 4:
             return [alphabet objectAtIndex:row];
             break;
         case 5:
@@ -165,27 +172,27 @@
         SystemSoundID klick;
         AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
         AudioServicesPlaySystemSound(klick);
-       indicator = [self showActivityIndicatorOnView:self.parentViewController.view];
-       awaitingResponse=true;
+        indicator = [self showActivityIndicatorOnView:self.parentViewController.view];
+        awaitingResponse=true;
         
-       NSString *temp1 = @"NN";
-       NSString *temp2 = [temp1 stringByAppendingString:[numbers objectAtIndex:[postcodePicker selectedRowInComponent:2]]];
-       NSString *temp3 = [temp2 stringByAppendingString:[numbers objectAtIndex:[postcodePicker selectedRowInComponent:3]]];
-       NSString *temp4 = [temp3 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:4]]];
-       postCode = [temp4 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:5]]];
-       NSString *preURL = @"https:selfserve.northampton.gov.uk/mycouncil/BinRoundFinder?postcode=";
-       NSString *postURL = @"&mobileApp=true";
-       NSString *url1 = [preURL stringByAppendingString:postCode];
-       NSString *url2 = [url1 stringByAppendingString:postURL];
-       NSURLRequest *binXML=[NSURLRequest requestWithURL:[NSURL URLWithString:url2]
-                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
+        NSString *temp1 = @"NN";
+        NSString *temp2 = [temp1 stringByAppendingString:[numbers objectAtIndex:[postcodePicker selectedRowInComponent:2]]];
+        NSString *temp3 = [temp2 stringByAppendingString:[numbers objectAtIndex:[postcodePicker selectedRowInComponent:3]]];
+        NSString *temp4 = [temp3 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:4]]];
+        postCode = [temp4 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:5]]];
+        NSString *preURL = @"https:selfserve.northampton.gov.uk/mycouncil/BinRoundFinder?postcode=";
+        NSString *postURL = @"&mobileApp=true";
+        NSString *url1 = [preURL stringByAppendingString:postCode];
+        NSString *url2 = [url1 stringByAppendingString:postURL];
+        NSURLRequest *binXML=[NSURLRequest requestWithURL:[NSURL URLWithString:url2]
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
                                           timeoutInterval:30.0];
-       nbcBinConnection=[[NSURLConnection alloc] initWithRequest:binXML delegate:self];
-       if (nbcBinConnection) {
-           xmlData = [[NSMutableData data] retain];
-       } else {
-        [self requestFailed];
-       }  
+        nbcBinConnection=[[NSURLConnection alloc] initWithRequest:binXML delegate:self];
+        if (nbcBinConnection) {
+            xmlData = [[NSMutableData data] retain];
+        } else {
+            [self requestFailed];
+        }
     }
 }
 
@@ -214,7 +221,7 @@
     NSString *temp3 = [temp2 stringByAppendingString:[numbers objectAtIndex:[postcodePicker selectedRowInComponent:3]]];
     NSString *temp4 = [temp3 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:4]]];
     NSString *postCode2 = [temp4 stringByAppendingString:[alphabet objectAtIndex:[postcodePicker selectedRowInComponent:5]]];
-
+    
     switch ([[xmlParser xmlBinEntries]count]) {
         case 0:
         {
@@ -260,12 +267,12 @@
     [indicator stopAnimating];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                     message:@"Sorry, this service is currently unavailable. Please try again later."
-                                                   delegate:nil 
-                                          cancelButtonTitle:@"OK" 
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
                                           otherButtonTitles: nil];
     [alert show];
     [alert release];
-
+    
 }
 
 - (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView

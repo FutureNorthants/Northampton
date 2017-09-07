@@ -14,7 +14,7 @@
 
 @synthesize textView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     fromReport=false;
     fromContact=false;
@@ -52,21 +52,26 @@
     self.navigationItem.title=@"My Name";
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [textView setCenter:CGPointMake(160,65)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [self.view setBackgroundColor:[UIColor whiteColor]];
-            [textView setCenter:CGPointMake(160,75)];
-        }else{
-            [textView setCenter:CGPointMake(160,80)];
-        }
+        [textView setCenter:CGPointMake(160,75)];
     }
-    else // 3.5 inch
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [self.view setBackgroundColor:[UIColor whiteColor]];
-            [textView setCenter:CGPointMake(160,65)];
-        }
+        [textView setCenter:CGPointMake(188,125)];
+    }
+    
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [textView setCenter:CGPointMake(207,155)];
     }
     
     textView.returnKeyType = UIReturnKeyDone;
@@ -76,7 +81,7 @@
     [super viewDidAppear:animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults objectForKey:@"CustomerName"]){
-    textView.text=[defaults objectForKey:@"CustomerName"];
+        textView.text=[defaults objectForKey:@"CustomerName"];
     }
 }
 
@@ -96,10 +101,10 @@
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
-{    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
-    [defaults setObject:textField.text forKey:@"CustomerName"];    
-    [defaults synchronize]; 
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:textField.text forKey:@"CustomerName"];
+    [defaults synchronize];
     
     if(fromReport|fromContact){
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -109,7 +114,7 @@
             self.navigationItem.backBarButtonItem = backButton;
             [backButton release];
             [self.navigationController pushViewController:vcResponse animated:YES];
-            [vcResponse release];    
+            [vcResponse release];
         }else{
             MyDetailsPostcodeViewController *vcPostcode = [[MyDetailsPostcodeViewController alloc] initWithNibName:@"MyDetailsPostcodeViewController" bundle:nil fromReport:false fromContact:true];
             UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -121,7 +126,7 @@
     }else {
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:[self.navigationController.viewControllers count]-2] animated:YES];
     }
-
+    
     return YES;
 }
 

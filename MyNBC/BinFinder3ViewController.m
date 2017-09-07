@@ -40,72 +40,60 @@
     self.navigationItem.title=@"Sorry";
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    [label1 setTextColor:[UIColor blackColor]];
+    [lookupResponse setTextColor:[UIColor colorWithRed:0.0 green:153.0/255.0 blue:0.0 alpha:1.0]];
+    [label2 setTextColor:[UIColor blackColor]];
+    
+    if (screenBounds.size.height == 480) // 3.5 inch
+    {
+        [label1 setCenter:CGPointMake(160,60)];
+        [lookupResponse setCenter:CGPointMake(160,115)];
+        [buttonCheck setCenter:CGPointMake(160,175)];
+        [label2 setCenter:CGPointMake(160,275)];
+        [buttonCall setCenter:CGPointMake(160,330)];
+    }
+    
     if (screenBounds.size.height == 568) // 4 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [label1 setCenter:CGPointMake(160,98)];
-            [label1 setTextColor:[UIColor blackColor]];
-            [lookupResponse setCenter:CGPointMake(160,151)];
-            [lookupResponse setTextColor:[UIColor colorWithRed:0.0 green:153.0/255.0 blue:0.0 alpha:1.0]];
-            [buttonCheck setCenter:CGPointMake(160,213)];
-            [label2 setCenter:CGPointMake(160,353)];
-            [label2 setTextColor:[UIColor blackColor]];
-            [buttonCall setCenter:CGPointMake(160,418)];
-        }else{
-            [label1 setCenter:CGPointMake(160,108)];
-            [lookupResponse setCenter:CGPointMake(160,163)];
-            [buttonCheck setCenter:CGPointMake(160,223)];
-            [label2 setCenter:CGPointMake(160,363)];
-            [buttonCall setCenter:CGPointMake(160,418)];
-        }
+        [label1 setCenter:CGPointMake(160,98)];
+        [lookupResponse setCenter:CGPointMake(160,151)];
+        [buttonCheck setCenter:CGPointMake(160,213)];
+        [label2 setCenter:CGPointMake(160,353)];
+        [buttonCall setCenter:CGPointMake(160,418)];
     }
-    else // 3.5 inch
+    
+    if (screenBounds.size.height == 667) // 4.7 inch
     {
-        if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-            [label1 setCenter:CGPointMake(160,60)];
-            [label1 setTextColor:[UIColor blackColor]];
-            [lookupResponse setCenter:CGPointMake(160,115)];
-            [lookupResponse setTextColor:[UIColor colorWithRed:0.0 green:153.0/255.0 blue:0.0 alpha:1.0]];
-            [buttonCheck setCenter:CGPointMake(160,175)];
-            [label2 setCenter:CGPointMake(160,275)];
-            [label2 setTextColor:[UIColor blackColor]];
-            [buttonCall setCenter:CGPointMake(160,330)];
-        }
+        [label1 setCenter:CGPointMake(188,110)];
+        [lookupResponse setCenter:CGPointMake(188,160)];
+        [buttonCheck setCenter:CGPointMake(188,220)];
+        [label2 setCenter:CGPointMake(188,360)];
+        [buttonCall setCenter:CGPointMake(188,430)];
     }
     
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        [buttonCheck setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [buttonCheck setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[buttonCheck layer] setCornerRadius:8.0f];
-        [[buttonCheck layer] setMasksToBounds:YES];
-        buttonCheck.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-        [buttonCall setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [buttonCall setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
-        [[buttonCall layer] setCornerRadius:8.0f];
-        [[buttonCall layer] setMasksToBounds:YES];
-        buttonCall.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
-    }else{
-        [[buttonCheck layer] setCornerRadius:8.0f];
-        [[buttonCheck layer] setMasksToBounds:YES];
-        [[buttonCheck layer] setBorderWidth:1.0f];
-        [[buttonCheck layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                                 green:30/255.0
-                                                                  blue:72/255.0
-                                                                 alpha:1.0] CGColor]];
-        
-        
-        [[buttonCall layer] setCornerRadius:8.0f];
-        [[buttonCall layer] setMasksToBounds:YES];
-        [[buttonCall layer] setBorderWidth:1.0f];
-        [[buttonCall layer] setBackgroundColor:[[UIColor colorWithRed:170/255.0
-                                                                green:30/255.0
-                                                                 blue:72/255.0
-                                                                alpha:1.0] CGColor]];
+    if (screenBounds.size.height == 736) // 5.5 inch
+    {
+        [label1 setCenter:CGPointMake(207,140)];
+        [lookupResponse setCenter:CGPointMake(207,190)];
+        [buttonCheck setCenter:CGPointMake(207,250)];
+        [label2 setCenter:CGPointMake(207,390)];
+        [buttonCall setCenter:CGPointMake(207,460)];
     }
-
     
-
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [buttonCheck setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [buttonCheck setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[buttonCheck layer] setCornerRadius:8.0f];
+    [[buttonCheck layer] setMasksToBounds:YES];
+    buttonCheck.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    [buttonCall setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [buttonCall setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:0.2] forState:UIControlStateHighlighted];
+    [[buttonCall layer] setCornerRadius:8.0f];
+    [[buttonCall layer] setMasksToBounds:YES];
+    buttonCall.titleLabel.font  = [UIFont fontWithName:@"HelveticaNeue" size:32];
+    
     [lookupResponse setText:postcode];
 }
 
@@ -135,7 +123,7 @@
     SystemSoundID klick;
     AudioServicesCreateSystemSoundID((CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"button-20" ofType:@"wav"]isDirectory:NO],&klick);
     AudioServicesPlaySystemSound(klick);
-    [[UIApplication sharedApplication] 
+    [[UIApplication sharedApplication]
      openURL:[NSURL URLWithString:@"tel://03003307000"]];
 }
 
